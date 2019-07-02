@@ -10,7 +10,7 @@ data class User(
     val avatar: String?,
     val rating: Int = 0,
     val respect: Int = 0,
-    val lastVisit: Date? = null,
+    val lastVisit: Date? = Date(),
     val isOnline: Boolean = false
 ) {
 

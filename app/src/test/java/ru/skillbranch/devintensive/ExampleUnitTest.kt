@@ -78,10 +78,8 @@ class ExampleUnitTest {
     @Test
     fun test_abstract_factory() {
         val user = User.makeUser("Макеев Михаил")
-        val txtMessage = BaseMessage.makeMessage(user, Chat("0"), payload="any text message", type = "text")
-        val imgMessage = BaseMessage.makeMessage(user, Chat("0"), payload="any image url", type = "image")
-
-        println(txtMessage.formatMessage())
-        println(imgMessage.formatMessage())
+        BaseMessage.makeMessage(user, Chat("0"), payload="any text message", type = "text")
+        BaseMessage.makeMessage(user, Chat("0"), Date(), "https://anyurl.com", "image",true)
     }
+
 }

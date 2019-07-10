@@ -13,6 +13,45 @@ data class User(
     val lastVisit: Date? = Date(),
     val isOnline: Boolean = false
 ) {
+    class Builder {
+        var id: String = UUID.randomUUID().toString()
+            private set
+        var firstName: String? = null
+            private set
+        var lastName: String? = null
+            private set
+        var avatar: String? = null
+            private set
+        var rating: Int = 0
+            private set
+        var respect: Int = 0
+            private set
+        var lastVisit: Date? = Date()
+            private set
+        var isOnline: Boolean = false
+            private set
+
+        fun id(id: String) = apply { this.id = id }
+        fun firstName(firstName: String?) = apply { this.firstName = firstName }
+        fun lastName(lastName: String?) = apply { this.lastName = lastName }
+        fun avatar(avatar: String?) = apply { this.avatar = avatar }
+        fun rating(rating: Int) = apply { this.rating = rating }
+        fun respect(respect: Int) = apply { this.respect = respect }
+        fun lastVisit(lastVisit: Date?) = apply { this.lastVisit = lastVisit }
+        fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
+        fun build() = User(this)
+    }
+
+    constructor(builder: Builder) : this(
+        id = builder.id,
+        firstName = builder.firstName,
+        lastName = builder.lastName,
+        avatar = builder.avatar,
+        rating = builder.rating,
+        respect = builder.respect,
+        lastVisit = builder.lastVisit,
+        isOnline = builder.isOnline
+    )
 
     constructor(id: String, firstName: String?, lastName: String?) : this(
         id = id,
@@ -24,7 +63,6 @@ data class User(
     constructor(id: String) : this(id, "John", "Doe")
 
     init {
-
         println("It`s Alive!!!\n" +
                 "${if(lastName=="Doe") "His name is $firstName $lastName" else "And his name is $firstName $lastName !!!" }\n")
     }
@@ -35,7 +73,7 @@ data class User(
         fun makeUser(fullname:String?) : User{
             lastId++
 
-            var (firstName, lastName) = Utils.parseFullName(fullname)
+            val (firstName, lastName) = Utils.parseFullName(fullname)
 
             return User(id = "$lastId", firstName = firstName, lastName = lastName)
         }

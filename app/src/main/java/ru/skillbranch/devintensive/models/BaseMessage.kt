@@ -2,31 +2,24 @@ package ru.skillbranch.devintensive.models
 
 import java.util.*
 
-abstract class BaseMessage(
+abstract class BaseMessage (
     val id: String,
     val from: User?,
     val chat: Chat,
     val isIncoming: Boolean = false,
-    val date: Date = Date()
+    val date : Date = Date()
 ) {
 
-    abstract fun formatMessage():String
+    abstract fun formatMessage(): String
 
     companion object AbstractFactory{
-        var lastId = -1
-        fun makeMessage(from: User?, chat: Chat, date: Date = Date(), payload:Any?, type:String="text", isIncoming: Boolean = false):BaseMessage{
-            lastId++
+        var lastId = 0
+        fun makeMessage(from: User?, chat: Chat, date: Date = Date(), type:String = "text", payload: Any, isIncoming: Boolean = false):BaseMessage{
             return when(type){
-                "image"-> {
-                    val imageMessage = ImageMessage("$lastId", from, chat, date = date, image = payload as String, isIncoming = isIncoming)
-                    println(imageMessage.formatMessage())
-                    imageMessage
-                }
-                else -> {
-                    val textMessage = TextMessage("$lastId", from, chat, date = date, text = payload as String, isIncoming = isIncoming)
-                    println(textMessage.formatMessage())
-                    textMessage
-                }
+                "image"-> ImageMessage("${lastId++}", from, chat, date = date, image = payload as String, isIncoming = isIncoming)
+                "text" -> TextMessage("${lastId++}", from, chat, date = date, text = payload as String, isIncoming = isIncoming)
+
+                else-> if ("image" == payload || "text" == payload) makeMessage(from, chat, date, payload, type, isIncoming) else throw IllegalArgumentException()
             }
         }
     }

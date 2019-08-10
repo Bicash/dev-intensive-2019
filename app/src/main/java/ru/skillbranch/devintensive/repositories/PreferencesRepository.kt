@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.models.Profile
 
-object PreferenceRepository {
+object PreferencesRepository {
     private const val FIRST_NAME = "FIRST_NAME"
     private const val LAST_NAME = "LAST_NAME"
     private const val ABOUT = "ABOUT"

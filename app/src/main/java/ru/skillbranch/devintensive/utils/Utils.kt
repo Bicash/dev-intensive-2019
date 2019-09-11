@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
 import android.content.Context
+import android.util.TypedValue
 import kotlin.math.roundToInt
 
 object Utils {
@@ -111,5 +112,11 @@ object Utils {
 
     fun convertSpToPx(context: Context, sp: Int): Int {
         return sp * context.resources.displayMetrics.scaledDensity.roundToInt()
+    }
+
+    fun themeBasedColor(context: Context, attrColor: Int): Int {
+        val value = TypedValue()
+        context.theme.resolveAttribute(attrColor, value, true)
+        return value.data
     }
 }

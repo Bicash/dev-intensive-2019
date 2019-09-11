@@ -23,7 +23,8 @@
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/spacing_normal_16">
 
-            <ImageButton android:id="@+id/btn_switch_theme"
+            <ImageButton
+                android:id="@+id/btn_switch_theme"
                 android:layout_width="@dimen/btn_round_size_40"
                 android:layout_height="@dimen/btn_round_size_40"
                 android:background="@drawable/btn_round_bg"

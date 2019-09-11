@@ -6,6 +6,7 @@ import android.graphics.Bitmap.Config
 import android.graphics.PorterDuff.Mode
 import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
@@ -112,6 +113,7 @@ class CircleImageView @JvmOverloads constructor (
         return drawable.toBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Config.ARGB_8888)
     }
 
+
     private fun getCircleBitmap(bitmap: Bitmap): Bitmap {
         val smallest = min(bitmap.width, bitmap.height)
         val outputBmp = Bitmap.createBitmap(smallest, smallest, Config.ARGB_8888)
@@ -127,5 +129,17 @@ class CircleImageView @JvmOverloads constructor (
         canvas.drawBitmap(bitmap, 0F, 0F,  paint)
 
         return outputBmp
+    }
+
+    fun setInitials(initials: String) {
+        val color = TypedValue()
+        context.theme.resolveAttribute(R.attr.colorAccent, color, true)
+
+        super.setImageBitmap(TextBitmapBuilder(this.layoutParams.width, this.layoutParams.height)
+            .setBackgroundColor(color.data)
+            .setText(initials)
+            .setTextSize(Utils.convertSpToPx(context, 48))
+            .setTextColor(Color.WHITE)
+            .build())
     }
 }

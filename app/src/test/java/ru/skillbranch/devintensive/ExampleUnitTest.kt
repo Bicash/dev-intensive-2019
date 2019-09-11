@@ -7,8 +7,8 @@ import ru.skillbranch.devintensive.extensions.add
 import ru.skillbranch.devintensive.extensions.format
 import ru.skillbranch.devintensive.extensions.toUserView
 import ru.skillbranch.devintensive.models.BaseMessage
-import ru.skillbranch.devintensive.models.Chat
-import ru.skillbranch.devintensive.models.User
+import ru.skillbranch.devintensive.models.data.Chat
+import ru.skillbranch.devintensive.models.data.User
 import java.util.*
 
 /**
@@ -78,8 +78,10 @@ class ExampleUnitTest {
     @Test
     fun test_abstract_factory() {
         val user = User.makeUser("Макеев Михаил")
-        BaseMessage.makeMessage(user, Chat("0"), payload="any text message", type = "text")
-        BaseMessage.makeMessage(user, Chat("0"), Date(), "https://anyurl.com", "image",true)
+        BaseMessage.makeMessage(user,
+            Chat("0"), payload="any text message", type = "text")
+        BaseMessage.makeMessage(user,
+            Chat("0"), Date(), "https://anyurl.com", "image",true)
     }
 
 }
